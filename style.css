@@ -640,6 +640,8 @@ footer {
     bottom: 20px;
   }
 }
+/* AJUSTES FINAIS PARA CELULAR */
+
 @media (max-width: 800px) {
   html, body {
     height: auto;
@@ -647,6 +649,29 @@ footer {
     overflow-y: auto;
   }
 
+  body {
+    position: static;
+  }
+
+  .dive-screen {
+    display: flex;
+  }
+
+  .cards {
+    gap: 16px;
+  }
+
+  .card {
+    height: auto;
+    min-height: 0;
+    padding: 30px 24px 65px;
+  }
+
+  .card-action {
+    bottom: 20px;
+    left: 24px;
+  }
+}
   body {
     position: static;
   }
