@@ -660,3 +660,18 @@ footer {
     position: static;
   }
 }
+@media (max-width: 800px) {
+  .cards {
+    gap: 16px;
+  }
+
+  .card {
+    min-height: auto;
+    padding: 30px 24px 65px;
+  }
+
+  .card-action {
+    bottom: 20px;
+    left: 24px;
+  }
+}
