@@ -175,7 +175,128 @@
     </footer>
 
 
-   <script src="script.js?v=2032"></script>
+   <script>
+(() => {
+    const button = document.getElementById("diveButton");
+    const explorar = document.getElementById("explorar");
+    const hero = document.querySelector(".hero");
+
+    if (!button || !explorar) return;
+
+    let diving = false;
+
+    function iniciarMergulho() {
+        if (diving) return;
+        diving = true;
+
+        const tela = document.createElement("div");
+        tela.className = "dive-screen";
+
+        // Garante que a animação apareça no celular
+        tela.style.setProperty("display", "flex", "important");
+        tela.style.position = "fixed";
+        tela.style.inset = "0";
+        tela.style.zIndex = "99999";
+        tela.style.alignItems = "center";
+        tela.style.justifyContent = "center";
+        tela.style.touchAction = "none";
+
+        tela.innerHTML = `
+            <div class="dive-depth">
+                <span>PROFUNDIDADE</span>
+                <strong id="diveDepth">0 m</strong>
+            </div>
+
+            <div class="dive-progress">
+                <div id="diveProgress"></div>
+            </div>
+
+            <div class="dive-center">
+                <span>ABYSS EXPEDITION</span>
+                <p>INICIANDO MERGULHO</p>
+            </div>
+        `;
+
+        document.body.appendChild(tela);
+
+        const profundidade = tela.querySelector("#diveDepth");
+        const progresso = tela.querySelector("#diveProgress");
+
+        let inicio = null;
+        const duracao = 5500;
+
+        function animar(tempo) {
+            if (inicio === null) inicio = tempo;
+
+            const porcentagem = Math.min(
+                (tempo - inicio) / duracao, 1
+            );
+
+            const suave = porcentagem * porcentagem *
+                (3 - 2 * porcentagem);
+
+            const metros = Math.floor(200 * suave);
+
+            profundidade.textContent = `${metros} m`;
+            progresso.style.height = `${porcentagem * 100}%`;
+
+            const escuridao = suave * 0.55;
+
+            tela.style.background = `
+                linear-gradient(
+                    to bottom,
+                    rgba(0, 30, 55, ${0.35 + escuridao * 0.4}),
+                    rgba(0, 5, 15, ${0.65 + escuridao * 0.3})
+                )
+            `;
+
+            if (porcentagem < 1) {
+                requestAnimationFrame(animar);
+            } else {
+                profundidade.textContent = "200 m";
+
+                setTimeout(() => {
+                    tela.style.animation = "none";
+                    tela.classList.add("dive-finish");
+
+                    explorar.scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+                    setTimeout(() => {
+                        tela.remove();
+                        diving = false;
+                    }, 1000);
+
+                }, 500);
+            }
+        }
+
+        requestAnimationFrame(animar);
+    }
+
+    // Funciona ao clicar no botão
+    button.addEventListener("click", iniciarMergulho);
+
+    // No celular, deslizar para cima também inicia
+    let inicioToque = 0;
+
+    if (hero) {
+        hero.addEventListener("touchstart", (e) => {
+            inicioToque = e.touches[0].clientY;
+        }, { passive: true });
+
+        hero.addEventListener("touchmove", (e) => {
+            const distancia = inicioToque - e.touches[0].clientY;
+
+            if (!diving && distancia > 35) {
+                e.preventDefault();
+                iniciarMergulho();
+            }
+        }, { passive: false });
+    }
+})();
+</script>
 
 </body>
 </html>
