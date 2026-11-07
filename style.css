@@ -15,7 +15,8 @@ body {
     background: #020b14;
     color: #eefaff;
     font-family: Arial, Helvetica, sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 
