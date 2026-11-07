@@ -614,3 +614,17 @@ footer {
         letter-spacing: 3px;
     }
 }
+@media (max-width: 800px) {
+  header {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+  }
+
+  header nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+}
