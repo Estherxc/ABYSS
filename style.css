@@ -639,3 +639,14 @@ footer {
     bottom: 20px;
   }
 }
+@media (max-width: 800px) {
+  html, body {
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  body {
+    position: static;
+  }
+}
