@@ -628,3 +628,14 @@ footer {
     gap: 12px;
   }
 }
+@media (max-width: 800px) {
+  .card {
+    height: auto;
+    min-height: 0;
+    padding-bottom: 65px;
+  }
+
+  .card-action {
+    bottom: 20px;
+  }
+}
