@@ -90,7 +90,3 @@ diveButton.addEventListener("click", () => {
 
     requestAnimationFrame(diveAnimation);
 });
-
-document.getElementById("diveButton").addEventListener("click", function () {
-    alert("O botão está funcionando!");
-});
