@@ -7,14 +7,6 @@ diveButton.addEventListener("click", () => {
     if (diving) return;
 
     diving = true;
-    const diveButton = document.getElementById("diveButton");
-
-diveButton.onclick = function () {
-    document.getElementById("explorar").scrollIntoView({
-        behavior: "smooth"
-    });
-};
-
 
     const diveScreen = document.createElement("div");
     diveScreen.className = "dive-screen";
